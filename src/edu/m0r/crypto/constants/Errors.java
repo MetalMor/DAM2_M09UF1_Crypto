@@ -6,6 +6,7 @@ package edu.m0r.crypto.constants;
  */
 public class Errors {
     public static final String ERROR_WRONG_NUMBER_INPUT = "Wrong keyboard input: only integer numbers.";
+    public static final String ERROR_MISSING_OUTER_KEY = "Could not find outer key.";
     
     private static void printError(String strErr) {
         System.out.println(strErr);

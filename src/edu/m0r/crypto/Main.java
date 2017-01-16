@@ -1,7 +1,8 @@
 package edu.m0r.crypto;
 
 import edu.m0r.crypto.util.InputUtils;
-import edu.m0r.crypto.encryption.Caesar;
+import edu.m0r.crypto.cypher.caesar.CaesarCypher;
+import edu.m0r.crypto.cypher.vigenere.VigenereCypher;
 import java.util.Scanner;
 
 /**
@@ -16,9 +17,10 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("Write smth:");
-        String message = getInput().readString();
-        System.out.println("U wrote: " + message);
-        Caesar c = new Caesar(message);
+        //String message = getInput().readString();
+        String message = "la cacatua voladora";
+        VigenereCypher c = new VigenereCypher(message);
+        c.setKey("HOWDY");
         c.encrypt();
         c.decrypt();
     }

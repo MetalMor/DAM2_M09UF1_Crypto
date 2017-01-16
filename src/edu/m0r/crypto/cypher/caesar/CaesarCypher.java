@@ -1,73 +1,55 @@
-package edu.m0r.crypto.encryption;
+package edu.m0r.crypto.cypher.caesar;
 
+import edu.m0r.crypto.cypher.AbstractCypher;
 import edu.m0r.crypto.constants.Variables;
 import edu.m0r.crypto.util.NumberUtils;
 import edu.m0r.crypto.util.StringUtils;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
- *
+ * Clase para cifrar Strings con el método César.
  * @author m0R
  */
-public class Caesar {
-    private List<String> _letters;
-    private String _message;
+public class CaesarCypher extends AbstractCypher {
     private Integer _increment;
-    private boolean _encrypted = false;
     
-    public Caesar() { }
+    public CaesarCypher() { }
     
-    public Caesar(String message) {
-        this();
-        setMessage(message);
+    public CaesarCypher(String message) {
+        super(message);
     }
     
-    public Caesar(String message, int increment) {
+    public CaesarCypher(String message, int increment) {
         this(message);
         setIncrement(increment);
     }
     
-    public String getMessage() {
-        return _message;
-    }
-    
+    @Override
     public final void encrypt() {
         if(!isEncrypted()) {
-            List<String> letters = Arrays.asList(Variables.LETTERS);
+            List<String> letters = Variables.getLetters();
             List<Integer> indexes = StringUtils.getIndexList(getMessage(), letters);
             setMessage(StringUtils.buildFromIndexList(indexes, getLetters()));
             setEncrypted(true);
         }
-        printMessage("Encrypted message: ");
+        printMessage();
     }
     
+    @Override
     public final void decrypt() {
         if(isEncrypted()) {
-            List<String> letters = Arrays.asList(Variables.LETTERS);
+            List<String> letters = Variables.getLetters();
             List<Integer> indexes = StringUtils.getIndexList(getMessage(), getLetters());
             setMessage(StringUtils.buildFromIndexList(indexes, letters));
             setEncrypted(false);
         }
-        printMessage("Decrypted message: ");
-    }
-    
-    private void printMessage() {
-        printMessage("");
-    }
-    
-    private void printMessage(String label) {
-        System.out.println(label + getMessage());
-    }
-    
-    public final void setMessage(String message) {
-        _message = message;
+        printMessage();
     }
     
     public int getIncrement() {
         if(_increment == null) {
-            int max = Arrays.asList(Variables.LETTERS).size(),
+            int max = Variables.getLetters().size(),
                     min = 1;
             setIncrement(NumberUtils.randomNumber(min, max));
         }
@@ -78,9 +60,10 @@ public class Caesar {
         _increment = increment;
     }
     
+    @Override
     public List<String> getLetters() {
         if(_letters == null) {
-            List<String> letters = new ArrayList<>(Arrays.asList(Variables.LETTERS));
+            List<String> letters = Variables.getLetters();
             int lastIndex = letters.size();
             List<String> subList = new ArrayList<>(letters.subList(lastIndex - getIncrement(), lastIndex)),
                     result = new ArrayList<>();
@@ -90,17 +73,5 @@ public class Caesar {
             setLetters(result);
         }
         return _letters;
-    }
-    
-    public void setLetters(List<String> letters) {
-        _letters = letters;
-    }
-    
-    public boolean isEncrypted() {
-        return _encrypted;
-    }
-    
-    public final void setEncrypted(boolean encrypted) {
-        _encrypted = encrypted;
     }
 }
