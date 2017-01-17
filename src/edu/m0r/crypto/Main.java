@@ -25,7 +25,6 @@ public class Main {
     public static void main(String[] args) {
         askMessage();
         chooseMode();
-        getInput().readString();
         getCypher().encrypt();
         getInput().readString();
         getCypher().decrypt();

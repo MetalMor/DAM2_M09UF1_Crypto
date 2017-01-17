@@ -38,7 +38,7 @@ public class InputUtils {
     }
     
     public Scanner getScanner() {
-        if(_scanner == null) setScanner(new Scanner(System.in));
+        setScanner(new Scanner(System.in));
         return _scanner;
     }
     
