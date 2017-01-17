@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author becari
  */
-public abstract class AbstractCypher {
+public abstract class AbstractCypher implements ICypher {
     protected List<String> _letters;
     private String _message;    
     private boolean _encrypted = false;
@@ -19,9 +19,16 @@ public abstract class AbstractCypher {
         setMessage(message);
     }
     
-    public abstract void encrypt();
-    public abstract void decrypt();
+    @Override
+    public void encrypt() {
+        System.out.println("Encrypting message...");
+    }
+    @Override
+    public void decrypt() {
+        System.out.println("Decrypting message...");
+    }
     
+    @Override
     public void printMessage() {
         printMessage("Message: ");
     }

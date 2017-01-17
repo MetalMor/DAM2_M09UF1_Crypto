@@ -1,8 +1,6 @@
 package edu.m0r.crypto.util;
 
-import edu.m0r.crypto.constants.Variables;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,8 +19,9 @@ public class StringUtils {
     
     public static String buildFromIndexList(List<Integer> indexes, List<String> letters) {
         StringBuilder sb = new StringBuilder();
-        for(Integer index : indexes)
-           sb.append(letters.get(index));
+        for(Integer index : indexes) 
+           if(index > 0) sb.append(letters.get(index));
+           else sb.append(" ");
         return sb.toString();
     }
 }

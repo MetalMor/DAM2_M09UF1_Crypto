@@ -27,6 +27,7 @@ public class CaesarCypher extends AbstractCypher {
     
     @Override
     public final void encrypt() {
+        super.encrypt();
         if(!isEncrypted()) {
             List<String> letters = Variables.getLetters();
             List<Integer> indexes = StringUtils.getIndexList(getMessage(), letters);
@@ -38,6 +39,7 @@ public class CaesarCypher extends AbstractCypher {
     
     @Override
     public final void decrypt() {
+        super.decrypt();
         if(isEncrypted()) {
             List<String> letters = Variables.getLetters();
             List<Integer> indexes = StringUtils.getIndexList(getMessage(), getLetters());

@@ -23,13 +23,18 @@ public class InputUtils {
         return getScanner().nextLine();
     }
     
-    public Integer readInt() {
-        try {
-            return getScanner().nextInt();
-        } catch(InputMismatchException imEx) {
-            Errors.wrongNumberInput();
-            return null;
-        }
+    public Integer readInt() throws InputMismatchException {
+        Integer input;
+        do {
+            try {
+                input = getScanner().nextInt();
+            } catch(InputMismatchException imEx) {
+                System.out.println("Wrong input: only numbers.");
+                input = null;
+                setScanner(new Scanner(System.in));
+            }
+        } while(input == null);
+        return input;
     }
     
     public Scanner getScanner() {
