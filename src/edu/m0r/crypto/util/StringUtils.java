@@ -20,8 +20,7 @@ public class StringUtils {
     public static String buildFromIndexList(List<Integer> indexes, List<String> letters) {
         StringBuilder sb = new StringBuilder();
         for(Integer index : indexes) 
-           if(index > 0) sb.append(letters.get(index));
-           else sb.append(" ");
+            sb.append(index < 0 ? " " : letters.get(index));
         return sb.toString();
     }
 }

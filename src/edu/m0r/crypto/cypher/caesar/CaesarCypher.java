@@ -64,7 +64,7 @@ public class CaesarCypher extends AbstractCypher {
     
     @Override
     public List<String> getLetters() {
-        if(_letters == null) {
+       if(_letters == null) {
             List<String> letters = Variables.getLetters();
             int lastIndex = letters.size();
             List<String> subList = new ArrayList<>(letters.subList(lastIndex - getIncrement(), lastIndex)),
