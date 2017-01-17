@@ -1,6 +1,6 @@
 package edu.m0r.crypto.util;
 
-import edu.m0r.crypto.constants.Variables;
+import edu.m0r.crypto.constants.Alphabet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.Set;
 public class MapUtils {
     
     private static Map<String, String> buildLetterMapMember(int increment) {
-        List<String> letters = Variables.getLetters(),
+        List<String> letters = Alphabet.getLetters(),
                 keys = new ArrayList<>(letters);
         int index = 0, length = keys.size();
         List<String> subLetters = keys.subList(length - 1 - increment, length);
@@ -33,7 +33,7 @@ public class MapUtils {
     }
     
     public static Map<String, Map<String, String>> buildLetterMap() {
-        List<String> keys = Variables.getLetters();
+        List<String> keys = Alphabet.getLetters();
         Collections.shuffle(keys, new Random(System.nanoTime()));
         Map<String, Map<String, String>> letterMap = new HashMap<>();
         int index = 0, length = keys.size();

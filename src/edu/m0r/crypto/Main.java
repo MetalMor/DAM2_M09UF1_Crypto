@@ -1,5 +1,6 @@
 package edu.m0r.crypto;
 
+import edu.m0r.crypto.constants.Errors;
 import edu.m0r.crypto.cypher.ICypher;
 import edu.m0r.crypto.cypher.caesar.CaesarCypher;
 import edu.m0r.crypto.util.InputUtils;
@@ -9,18 +10,27 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Clase principal
+ * Clase principal: ejecuta el programa.
  * @author m0R
  */
 public class Main {
 
+    /**
+     * Objeto cifrador.
+     */
     private static ICypher _cypher;
+    /**
+     * Objeto que controla la entrada de datos por teclado.
+     */
     private static InputUtils _input;
+    /**
+     * Mensaje que será cifrado.
+     */
     private static String _message;
-    private static String _param;
     
     /**
-     * @param args the command line arguments
+     * Método principal.
+     * @param args Argumentos del intérprete de comandos.
      */
     public static void main(String[] args) {
         askMessage();
@@ -30,6 +40,9 @@ public class Main {
         getCypher().decrypt();
     }
     
+    /**
+     * Pide al usuario que introduzca un mensaje para ser encriptado.
+     */
     public static void askMessage() {
         System.out.println("Enter a message to encrypt: ");
         String message;
@@ -39,6 +52,10 @@ public class Main {
         setMessage(message);
     }
     
+    /**
+     * Pide al usuario que introduzca un valor numérico para identificar
+     * el modo de cifrado.
+     */
     public static void chooseMode() {
         System.out.println("Choose encryption mode. 1: Caesar, 2: Vigenère");
         Integer[] allowed = {1, 2};
@@ -66,42 +83,58 @@ public class Main {
                         cypher = new VigenereCypher(getMessage(), key);
                         break;
                     default:
-                        System.out.println("Wrong mode, try again.");
+                        Errors.wrongNumberInput();
                         break;
                 }
         } while(!allowedList.contains(mode));
         setCypher(cypher);
     }
     
+    /**
+     * Retorna el mensaje a cifrar.
+     * @return Mensaje que será cifrado.
+     */
     public static String getMessage() {
         return _message;
     }
     
+    /**
+     * Define el mensaje a cifrar.
+     * @param message Mensaje que será cifrado.
+     */
     public static void setMessage(String message) {
         _message = message;
     }
     
-    public static String getParam() {
-        return _param;
-    }
-    
-    public static void setParam(String param) {
-        _param = param;
-    }
-    
+    /**
+     * Retorna el objeto cifrador.
+     * @return Objeto cifrador.
+     */
     public static ICypher getCypher() {
         return _cypher;
     }
     
+    /**
+     * Define el objeto cifrador.
+     * @param cypher Objeto cifrador.
+     */
     public static void setCypher(ICypher cypher) {
         _cypher = cypher;
     }
     
+    /**
+     * Retorna el objeto que controla la entrada de datos por teclado.
+     * @return Objeto que controla la entrada de datos por teclado.
+     */
     public static InputUtils getInput() {
         if(_input == null) setInput(new InputUtils(new Scanner(System.in)));
         return _input;
     }
     
+    /**
+     * Define el objeto que controla la entrada de datos por teclado.
+     * @param input Objeto que controla la entrada de datos por teclado.
+     */
     public static void setInput(InputUtils input) {
         _input = input;
     }

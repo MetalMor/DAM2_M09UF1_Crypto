@@ -1,7 +1,7 @@
 package edu.m0r.crypto.cypher.caesar;
 
 import edu.m0r.crypto.cypher.AbstractCypher;
-import edu.m0r.crypto.constants.Variables;
+import edu.m0r.crypto.constants.Alphabet;
 import edu.m0r.crypto.util.NumberUtils;
 import edu.m0r.crypto.util.StringUtils;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class CaesarCypher extends AbstractCypher {
     public final void encrypt() {
         super.encrypt();
         if(!isEncrypted()) {
-            List<String> letters = Variables.getLetters();
+            List<String> letters = Alphabet.getLetters();
             List<Integer> indexes = StringUtils.getIndexList(getMessage(), letters);
             setMessage(StringUtils.buildFromIndexList(indexes, getLetters()));
             setEncrypted(true);
@@ -41,7 +41,7 @@ public class CaesarCypher extends AbstractCypher {
     public final void decrypt() {
         super.decrypt();
         if(isEncrypted()) {
-            List<String> letters = Variables.getLetters();
+            List<String> letters = Alphabet.getLetters();
             List<Integer> indexes = StringUtils.getIndexList(getMessage(), getLetters());
             setMessage(StringUtils.buildFromIndexList(indexes, letters));
             setEncrypted(false);
@@ -51,7 +51,7 @@ public class CaesarCypher extends AbstractCypher {
     
     public int getIncrement() {
         if(_increment == null) {
-            int max = Variables.getLetters().size(),
+            int max = Alphabet.getLetters().size(),
                     min = 1;
             setIncrement(NumberUtils.randomNumber(min, max));
         }
@@ -65,7 +65,7 @@ public class CaesarCypher extends AbstractCypher {
     @Override
     public List<String> getLetters() {
        if(_letters == null) {
-            List<String> letters = Variables.getLetters();
+            List<String> letters = Alphabet.getLetters();
             int lastIndex = letters.size();
             List<String> subList = new ArrayList<>(letters.subList(lastIndex - getIncrement(), lastIndex)),
                     result = new ArrayList<>();
