@@ -14,8 +14,6 @@ import java.util.List;
 public class CaesarCypher extends AbstractCypher {
     private Integer _increment;
     
-    public CaesarCypher() { }
-    
     public CaesarCypher(String message) {
         super(message);
     }

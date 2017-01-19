@@ -10,12 +10,9 @@ public class VigenereCypher extends AbstractCypher {
     private String _key;
     private LettersTable _table;
     
-    public VigenereCypher() {
-        setTable(new LettersTable());
-    }
-    
     public VigenereCypher(String message) {
         super(message);
+        setTable(new LettersTable());
     }
     
     public VigenereCypher(String message, String key) {

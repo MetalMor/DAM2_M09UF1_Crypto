@@ -25,7 +25,7 @@ public abstract class AbstractCypher implements ICypher {
     /**
      * Constructor vacío.
      */
-    public AbstractCypher() { }
+    private AbstractCypher() { }
     
     /**
      * Constructor con parámetro de mensaje. Crea el cifrador con el mensaje
