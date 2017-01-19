@@ -60,18 +60,29 @@ public class CaesarCypher extends AbstractCypher {
         _increment = increment;
     }
     
-    @Override
-    public List<String> getLetters() {
-       if(_letters == null) {
-            List<String> letters = Alphabet.getLetters();
-            int lastIndex = letters.size();
-            List<String> subList = new ArrayList<>(letters.subList(lastIndex - getIncrement(), lastIndex)),
-                    result = new ArrayList<>();
-            letters.removeAll(subList);
+    private List<String> translateAlphabet() {
+        List<String> result = new ArrayList<>(),
+                letters = Alphabet.getLetters();
+        boolean indexSign = getIncrement() > 0;
+        int increment = Math.abs(getIncrement()),
+                lastIndex = indexSign ? letters.size() : increment,
+                firstIndex = indexSign ? lastIndex - increment : 0;
+        List<String> subList = new ArrayList<>(letters.subList(firstIndex, lastIndex));
+        letters.removeAll(subList);
+        if(indexSign) {
             result.addAll(subList);
             result.addAll(letters);
-            setLetters(result);
+        } else {
+            result.addAll(letters);
+            result.addAll(subList);
         }
+        return result;
+    }
+    
+    @Override
+    public List<String> getLetters() {
+        if(getIncrement() == 0) return Alphabet.getLetters();
+        if(_letters == null) setLetters(translateAlphabet());
         return _letters;
     }
 }
